@@ -23,3 +23,19 @@ phishing-simulation/
 ├── login.php              # Script PHP pour traiter et stocker les données
 ├── log.csv                # Fichier CSV où les données sont enregistrées
 └── README.md              # Documentation du projet
+# **Phishing Simulation**
+
+## **Prérequis**
+- Docker installé sur votre machine.
+- Git installé pour cloner le dépôt.
+
+---
+
+## **Instructions**
+
+### **1. Cloner le Dépôt**
+Cloner ce dépôt sur votre machine locale :
+```bash
+git clone https://github.com/hamzasedyame/phishing-simulation.git
+cd phishing-simulation
+
