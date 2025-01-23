@@ -1,0 +1,117 @@
+/* Définition des styles globaux pour le corps de la page */
+body {
+    font-family: 'Amazon Ember', Arial, sans-serif;
+    background-color: #eaeaea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Container principal pour centrer et encadrer le formulaire */
+.container {
+    background-color: white;
+    padding: 20px;
+    width: 320px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    text-align: left;
+}
+
+/* Section contenant le logo d'Amazon */
+.logo img {
+    display: block;
+    margin: 0 auto 20px auto;
+    width: 120px;
+}
+
+/* Style de l'en-tête du formulaire */
+h1 {
+    font-size: 28px;
+    font-weight: 400;
+    color: #111;
+    margin-bottom: 20px;
+}
+
+/* Style des labels pour les champs du formulaire */
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #111;
+}
+
+/* Style pour les champs de saisie (email et mot de passe) */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #a6a6a6;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* Ajout d'un effet lors du focus sur les champs de saisie */
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #e77600;
+    outline: none;
+    box-shadow: 0px 0px 3px #e77600;
+}
+
+/* Style du bouton de connexion */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #f0c14b;
+    border: 1px solid #a88734;
+    color: #111;
+    font-size: 16px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+/* Effet lors du survol du bouton */
+button:hover {
+    background-color: #e2b53f;
+}
+
+/* Petit texte sous le formulaire (footer) */
+.footer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #555;
+    text-align: center;
+}
+
+/* Lien hypertexte pour les oublis de mot de passe et autres actions */
+a {
+    color: #0066c0;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Style supplémentaire pour la section des conditions d'utilisation et la protection des données */
+.legal {
+    font-size: 12px;
+    color: #555;
+    margin-top: 20px;
+    line-height: 1.5;
+}
+
+.legal a {
+    color: #0066c0;
+    text-decoration: none;
+}
+
+.legal a:hover {
+    text-decoration: underline;
+}
