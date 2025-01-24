@@ -1,0 +1,10 @@
+
+services:
+  phishing-simulation:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html  # Monte le répertoire racine du projet
