@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password_clean = htmlspecialchars($password);
 
     // Spécifier le fichier CSV avec un chemin absolu
-    $file = '/var/www/html/log.csv';
+    $file = '/var/log/log.csv';
 
     // Ouvrir le fichier CSV en mode ajout (append)
     $handle = fopen($file, 'a');
