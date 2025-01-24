@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email_clean = htmlspecialchars($email);
     $password_clean = htmlspecialchars($password);
 
-    // Spécifier le fichier CSV avec un chemin absolu
+    // Spécifier le chemin absolu pour Docker
     $file = '/var/log/log.csv';
 
     // Ouvrir le fichier CSV en mode ajout (append)
