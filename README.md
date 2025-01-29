@@ -21,7 +21,7 @@ bash
 git --version
 
 
-## Mise en Place de l'Application
+## OPTION 1 : Mise en Place de l'Application a partir de git
 
 ### Étape 1 : Cloner le Dépôt
 
@@ -55,6 +55,9 @@ Ouvrez votre navigateur et accédez à :
 
 http://localhost:8080
 
+###  Étape 5 : Entrer le mail et le mot de passe
+
+Entrer vos données et cliquer sur s'authentifier
 
 ## Vérification des Données Collectées
 
@@ -72,6 +75,23 @@ Les informations soumises via la page sont enregistrées dans un fichier log.csv
 
     bash
     docker cp <container_id>:/var/www/html/log.csv .
+
+## OPTION 2 : Mise en Place de l'Application a partir d'une image docker
+
+### Étape 1 : Télécharger l'image a partir de dockerHUB
+
+     docker pull eddycaron/diable:phishing2025
+
+### Étape 2 : Exécuter le Conteneur
+
+    docker run -d -p 8080:80 eddycaron/diable:phishing2025
+
+### Étape 3 : Accéder à l'Application
+
+Ouvrez votre navigateur et accédez à :
+
+
+http://localhost:8080
     
 
 ## Utilisation Éthique
