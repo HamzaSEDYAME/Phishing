@@ -17,6 +17,7 @@ RUN touch /var/log/log.csv && \
 
 # Copier les fichiers de l'application dans /var/www/html/
 COPY . /var/www/html/
+COPY README.md /var/www/html/README.md
 
 # Configurer les permissions pour /var/www/html/
 RUN chown -R www-data:www-data /var/www/html && \
