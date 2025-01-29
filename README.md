@@ -28,8 +28,8 @@ git --version
 Clonez le dépôt GitHub sur votre machine locale :
 
 bash
-git clone https://github.com/hamzasedyame/phishing-simulation.git
-cd phishing-simulation
+git clone https://github.com/hamzasedyame/phishing.git
+cd phishing
 
 
 ### Étape 2 : Construire l'Image Docker
@@ -37,7 +37,7 @@ cd phishing-simulation
 Utilisez le fichier Dockerfile pour construire une image Docker :
 
 bash
-docker build -t phishing-simulation .
+docker build -t phishing .
 
 
 ### Étape 3 : Exécuter le Conteneur
@@ -45,7 +45,7 @@ docker build -t phishing-simulation .
 Lancez le conteneur Docker et mappez le port 8080 de votre machine :
 
 bash
-docker run -d -p 8080:80 phishing-simulation
+docker run -d -p 8080:80 phishing
 
 
 ### Étape 4 : Accéder à l'Application
