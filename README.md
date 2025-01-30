@@ -1,133 +1,116 @@
 # Phishing Simulation: Setup and Exploitation Guide
 
-## Ce guide explique comment configurer et utiliser une application de simulation de phishing avec une page de login similaire a AMAZON.
+## Ce guide explique comment configurer et utiliser l'application de simulation de phishing. 
 *À utiliser uniquement dans un cadre légal et éthique à des fins éducatives.*
 
 ---
 
-## Table des matières
-- [Prérequis](#prérequis)
-- [Option 1 : Mise en place de l'application à partir de Git](#option-1--mise-en-place-de-lapplication-à-partir-de-git)
-- [Option 2 : Mise en place de l'application à partir d'une image Docker](#option-2--mise-en-place-de-lapplication-à-partir-dune-image-docker)
-- [Vérification des données collectées](#vérification-des-données-collectées)
-- [Utilisation éthique](#utilisation-éthique)
-- [Contribuer](#contribuer)
-- [Licence](#licence)
-- [Auteur](#auteur)
-
----
-
 ## Prérequis
-Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votre machine :
 
-### Docker
-Docker est nécessaire pour exécuter l'application dans un conteneur.
-Vérifiez si Docker est installé avec la commande suivante :
+### Docker installé
+Assurez-vous que Docker est installé sur votre machine.
+
+Vérifiez avec :
 bash
 docker --version
 
-Si Docker n'est pas installé, vous pouvez le télécharger depuis le site officiel.
+Téléchargez Docker si nécessaire.
 
-### Git
-Git est requis pour cloner le dépôt.
-Vérifiez si Git est installé avec la commande suivante :
+### Git installé
+Assurez-vous que Git est installé pour cloner le dépôt.
+
+Vérifiez avec :
 bash
 git --version
 
-Si Git n'est pas installé, vous pouvez le télécharger depuis le site officiel.
 
 ---
 
-## Option 1 : Mise en place de l'application à partir de Git
+## Option 1 : Mise en Place de l'Application à partir de Git
 
-### Étape 1 : Cloner le dépôt
+### Étape 1 : Cloner le Dépôt
 Clonez le dépôt GitHub sur votre machine locale :
 bash
 git clone https://github.com/hamzasedyame/phishing.git
 cd phishing
 
 
-### Étape 2 : Construire l'image Docker
+### Étape 2 : Construire l'Image Docker
 Utilisez le fichier Dockerfile pour construire une image Docker :
 bash
 docker build -t phishing .
 
 
-### Étape 3 : Exécuter le conteneur
-Lancez le conteneur Docker en mappant le port 8080 de votre machine :
+### Étape 3 : Exécuter le Conteneur
+Lancez le conteneur Docker et mappez le port 8080 de votre machine :
 bash
 docker run -d -p 8080:80 phishing
 
 
-### Étape 4 : Accéder à l'application
-Ouvrez votre navigateur et accédez à l'application via l'URL suivante :
+### Étape 4 : Accéder à l'Application
+Ouvrez votre navigateur et accédez à :
 
 http://localhost:8080
 
 
-### Étape 5 : Entrer les informations
-Entrez un email et un mot de passe fictifs, puis cliquez sur *S'authentifier*.
+### Étape 5 : Entrer le mail et le mot de passe
+Entrez vos données et cliquez sur *S'authentifier*.
 
 ---
 
-## Option 2 : Mise en place de l'application à partir d'une image Docker
+## Vérification des Données Collectées
+Les informations soumises via la page sont enregistrées dans un fichier log.csv.
 
-### Étape 1 : Télécharger l'image depuis Docker Hub
-Téléchargez l'image Docker directement depuis Docker Hub :
+### Récupérer les données collectées
+1. *Obtenez l'identifiant du conteneur actif* :
+    bash
+    docker ps
+    
+   Identifiez le conteneur associé à l’image phishing.
+
+2. **Copier ou consulter  le fichier log.csv sur votre machine locale** :
+   Copie :
+    bash
+    docker cp <container_id>:/var/www/html/log.csv .
+    ou bien consulter : 
+    docker exec -it <container_id> bash 
+    ls 
+    cat log.csv
+    
+
+---
+
+## Option 2 : Mise en Place de l'Application à partir d'une Image Docker
+
+### Étape 1 : Télécharger l'Image depuis Docker Hub
 bash
 docker pull eddycaron/diable:phishing2025
 
 
-### Étape 2 : Exécuter le conteneur
-Lancez le conteneur en mappant le port 8080 :
+### Étape 2 : Exécuter le Conteneur
 bash
 docker run -d -p 8080:80 eddycaron/diable:phishing2025
 
 
-### Étape 3 : Accéder à l'application
-Ouvrez votre navigateur et accédez à l'application via l'URL suivante :
+### Étape 3 : Accéder à l'Application
+Ouvrez votre navigateur et accédez à :
 
 http://localhost:8080
 
 
 ---
 
-## Vérification des données collectées
-Les informations soumises via la page sont enregistrées dans un fichier log.csv.
-
-### Récupérer les données collectées
-Obtenez l'identifiant du conteneur actif :
-bash
-docker ps
-
-Identifiez le conteneur associé à l’image phishing.
-
-Copier ou consulter le fichier log.csv :
-
-Pour copier le fichier sur votre machine locale :
-bash
-docker cp <container_id>:/var/www/html/log.csv .
-
-
-Pour consulter directement le fichier dans le conteneur :
-bash
-docker exec -it <container_id> bash
-cat /var/www/html/log.csv
-
-
----
-
-## Utilisation éthique
-*Ce projet est conçu à des fins éducatives et de formation.*
+## Utilisation Éthique
+*Ce projet doit être utilisé uniquement à des fins éducatives ou de formation dans un cadre légal et contrôlé.*
 
 ⚠ *Toute utilisation illégale ou malveillante est strictement interdite et peut entraîner des poursuites judiciaires.*
 
 ---
 
 ## Contribuer
-Vous souhaitez contribuer au projet ? Voici comment procéder :
+Vous pouvez contribuer au projet en suivant ces étapes :
 
-1. *Forkez le dépôt sur GitHub*.
+1. *Forkez le dépôt*.
 2. *Créez une branche pour vos modifications* :
     bash
     git checkout -b feature/your-feature-name
@@ -151,5 +134,3 @@ Ce projet est sous licence MIT. Consultez le fichier LICENSE pour plus de détai
 
 ## Auteur
 *Hamza Sedyame*
-
-GitHub : [hamzasedyame](https://github.com/hamzasedyame)
