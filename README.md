@@ -67,10 +67,16 @@ Les informations soumises via la page sont enregistrées dans un fichier log.csv
 
     Identifiez le conteneur associé à l’image phishing-simulation.
 
-2. Copiez le fichier log.csv sur votre machine locale :
+2. Copier ou consulterle fichier log.csv sur votre machine locale :
 
+   Copie :
     bash
     docker cp <container_id>:/var/www/html/log.csv .
+   ou bien consulter : 
+    docker exec -it <container_id> bash 
+    ls 
+    cat log.csv
+
     
 
 ## Utilisation Éthique
