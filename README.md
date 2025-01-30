@@ -1,6 +1,6 @@
 # Phishing Simulation: Setup and Exploitation Guide
 
-## Ce guide explique comment configurer et utiliser une application de simulation de phishing.
+## Ce guide explique comment configurer et utiliser une application de simulation de phishing avec une page de login similaire a AMAZON.
 *À utiliser uniquement dans un cadre légal et éthique à des fins éducatives.*
 
 ---
